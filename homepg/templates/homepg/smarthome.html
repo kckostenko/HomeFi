@@ -1,0 +1,175 @@
+{% extends "homepg/base.html" %}
+{% block content %}
+  <!-- Image header -->
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">SmartHome Information</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+    <div class="tab">
+	  <button class="tablinks" onclick="openTab(event, 'Entire Home')" id="defaultOpen">Entire Home</button>
+	  <button class="tablinks" onclick="openTab(event, 'Rooms')">Rooms</button>
+	  <button class="tablinks" onclick="openTab(event, 'Lights')">Lights</button>
+		<button class="tablinks" onclick="openTab(event, 'Locks')">Locks</button>
+		<button class="tablinks" onclick="openTab(event, 'Alarm')">Alarm</button>
+	</div>
+
+	<div id="Entire Home" class="tabcontent" style="border:none">
+	  <h3>Status of Home</h3>
+		<h6>Lights</h6>
+		<table class="w3-table w3-table-all">
+			<tr>
+				<th>Room</th>
+				<th>Light Name</th>
+				<th>Status</th>
+				<th>Dim</th>
+				<th>Color</th>
+			</tr>
+			<tr>
+				<td>Living Room</td>
+				<td>Overhead Light</td>
+				<td>On</td>
+				<td> N/A</td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td>Bedroom 1</td>
+				<td>Floor Lamp</td>
+				<td>On</td>
+				<td> N/A</td>
+				<td>Pink</td>
+			</tr>
+		</table>
+		<h6>Locks</h6>
+		<table class="w3-table w3-table-all">
+			<tr>
+				<th>Lock Name</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td>Front Door</td>
+				<td>Unlocked</td>
+			</tr>
+			<tr>
+				<td>Back Door</td>
+				<td>Locked</td>
+			</tr>
+		</table>
+		<h6>Alarm</h6>
+		<table class="w3-table w3-table-all">
+			<tr>
+				<th>Alarm</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td>Home Alarm</td>
+				<td>Disarmed</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="Rooms" class="tabcontent" style="border:none">
+	  <h3>Status of Rooms</h3>
+	  <p>Coming Soon. </p>
+	</div>
+
+	<div id="Lights" class="tabcontent" style="border:none">
+	  <h3>Status of Lights</h3>
+		<h6>Lights</h6>
+		<table class="w3-table w3-table-all">
+			<tr>
+				<th>Room</th>
+				<th>Light Name</th>
+				<th>Status</th>
+				<th>Dim</th>
+				<th>Color</th>
+			</tr>
+			<tr>
+				<td>Living Room</td>
+				<td>Overhead Light</td>
+				<td>On</td>
+				<td> N/A</td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td>Bedroom 1</td>
+				<td>Floor Lamp</td>
+				<td>On</td>
+				<td> N/A</td>
+				<td>Pink</td>
+			</tr>
+		</table>
+		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-lights' %}">Add Light</a></button>
+		<button class="w3-btn w3-green" style="width:32%">Remove Light</button>
+		<button class="w3-btn w3-light-green" style="width:32%">Change Light Status</button>
+	</div>
+
+	<div id="Locks" class="tabcontent" style="border:none">
+	  <h3>Status of Locks</h3>
+	  <h6>Locks</h6>
+		<table class="w3-table w3-table-all">
+			<tr>
+				<th>Lock Name</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td>Front Door</td>
+				<td>Unlocked</td>
+			</tr>
+			<tr>
+				<td>Back Door</td>
+				<td>Locked</td>
+			</tr>
+		</table>
+		<button class="w3-btn w3-teal" style="width:32%">Add Lock</button>
+		<button class="w3-btn w3-green" style="width:32%">Remove Lock</button>
+		<button class="w3-btn w3-light-green" style="width:32%">Change Lock Status</button>
+	</div>
+
+	<div id="Alarm" class="tabcontent" style="border:none">
+	  <h3>Alarm Status</h3>
+		<h6>Alarm</h6>
+		<table class="w3-table w3-table-all">
+			<tr>
+				<th>Alarm</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td>Home Alarm</td>
+				<td>Disarmed</td>
+			</tr>
+		</table>
+		<button class="w3-btn w3-teal" style="width:32%">Change Alarm Status</button>
+	</div>
+
+	<script>
+	function openTab(evt, tabName) {
+	  var i, tabcontent, tablinks;
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+	  document.getElementById(tabName).style.display = "block";
+	  evt.currentTarget.className += " active";
+	}
+
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+	</script>
+{% endblock content %}
+<!-- End page content -->

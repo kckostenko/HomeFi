@@ -1,0 +1,23 @@
+{% extends "homepg/base.html" %}
+{% block content %}
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">Forgot Password? Get Stickbugged</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+		  <div class="w3-display-container w3-container">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/M5V_IXMewl4?autoplay=1&controls=0&modestbranding=1&showinfo=0&fs=0&rel=0"></iframe>
+		  </div>
+{% endblock content %}
+<!-- End page content -->

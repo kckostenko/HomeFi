@@ -1,0 +1,26 @@
+{% extends "homepg/base.html" %}
+{% block content %}
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">About Us</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+	  <div class="w3-display-container w3-container">
+		{% load static %} <img src="{% static 'images/home1.jpg' %}" alt="home" style="width:100%" />
+		  <div class="centered" style="background-color:darkslategrey;padding:24px;position: absolute;">
+			<p style="font-size:20px;color:azure">We are a small, woman-owned business that specializes in the development and retail of smart home devices. </p>
+			<p style="font-size:20px;color:azure"> Our goal is to provide a sense of security and peace-of-mind to homeowners everywhere through our state-of-the-art technology. </p>
+		  </div>
+	  </div>
+{% endblock content %}

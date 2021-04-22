@@ -1,0 +1,45 @@
+{% extends "homepg/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">Add New Light</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+
+    <form method="POST">
+      <div class="w3-display-container w3-container">
+<!--        {% load static %} <img src="{% static 'images/home1.jpg' %}" alt="home" style="width:100%" />-->
+<!--          <div class="centered" style="background-color:darkslategrey;padding:24px;">-->
+              {% csrf_token %}
+              <fieldset class="form-group" style="font-size:20px">
+                  <legend class="border-bottom mb-4" style="font-size:20px, p">Enter New Light Information </legend>
+                  {{ form|crispy }}
+              </fieldset>
+<!--            <label for="uname" style="font-size:30px;color:azure"><b>Username</b></label>-->
+<!--            <input type="text" placeholder="Enter Username" name="uname" required>-->
+<!--            <label for="psw" style="font-size:30px;color:azure"><b>Password</b></label>-->
+<!--            <input type="password" placeholder="Enter Password" name="psw" required>-->
+            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Add New Light</button>
+            <!-- <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+            -->
+          </div>
+          <div class="container" style="background-color:#f1f1f1">
+<!--            <span class="psw"><a href="{% url 'forgot-pswd' %}">Forgot password?</a></span>-->
+          </div>
+
+    </form>
+{% endblock content %}

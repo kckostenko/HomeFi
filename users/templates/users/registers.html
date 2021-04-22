@@ -1,0 +1,35 @@
+{% extends "homepg/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <!-- Top header -->
+		<header class="w3-container w3-xlarge">
+			<p class="w3-left">New User Registration</p>
+			<p class="w3-right">
+				<!-- <i class="fa fa-shopping-cart w3-margin-right"></i> -->
+				<table>
+					<tr>
+						<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /></td>
+						<td style="font-size: 15px;padding:10px"> Guest</td>
+					</tr>
+				</table>
+				<!-- <i class="fa fa-search"></i> -->
+			</p>
+		</header>
+
+    <div class="content-section">
+        <form method="POST">
+            <!-- add cross-site request forgery token, protects form against cross-site scripting -->
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4" style="font-size:20px">Join Today</legend>
+                    {{ form|crispy }}
+                </fieldset>
+        <!-- <div class="centered"> -->
+                <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;"> Submit </button>
+        <!-- </div> -->
+        </form>
+        <div class="container" style="background-color:#f1f1f1">
+           Already Have An Account? <a href="{% url 'user-login' %}"> Sign In! </a>
+        </div>
+    </div>
+{% endblock content %}

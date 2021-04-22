@@ -1,0 +1,24 @@
+{% extends "homepg/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">You Have Successfully Logged Out!</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+	<div class="w3-display-container w3-container">
+		{% load static %} <img src="{% static 'images/panda.gif' %}" alt="Angry Panda Meme" style="width:70%" />
+	</div>
+{% endblock content %}
+<!-- End page content -->

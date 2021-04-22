@@ -1,0 +1,35 @@
+{% extends "homepg/base.html" %}
+{% block content %}
+  <!-- Image header -->
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">Homepage</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+	<div class="w3-display-container w3-container">
+		{% load static %} <img src="{% static 'images/home3.jpg' %}" alt="Home" style="width:100%">
+		<div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+			<h1 class="w3-jumbo w3-hide-small">New Devices</h1>
+<!--			{% for post in posts%}-->
+<!--			<p> {{ post.author }} </p>-->
+<!--			<p> {{post.title}}: {{post.content}}</p>-->
+<!--			<p> &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; </p>-->
+<!--			{% endfor %}-->
+			<h1 class="w3-hide-small">COMING 2022</h1>
+			<!-- <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p> -->
+		</div>
+	</div>
+{% endblock content %}
+<!-- End page content -->
+
