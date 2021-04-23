@@ -44,6 +44,8 @@ def lightsForm(request):
             # form.cleaned_data is a DICTIONARY
             lightsObj.lightName = form.cleaned_data['lightName']
             lightsObj.color = form.cleaned_data['color']
+            lightsObj.dimness = form.cleaned_data['dimness']
+            lightsObj.state = form.cleaned_data['state']
             lightsObj.owner = request.user
             lightsObj.save()
             messages.success(request, 'Light ' + lightsObj.lightName + ' created!')

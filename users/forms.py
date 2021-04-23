@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from homepg import models as lightModel
+from homepg import models as Models
 
 
 class UserRegisterForm(UserCreationForm):
@@ -28,13 +28,13 @@ class addLights(forms.Form):
     # , choices=[('floor lamp', 'floor lamp'), ('table lamp', 'table lamp'),
     #                                                          ('ceiling light', 'ceiling light')]
     # dimness = forms.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
-    #dimness = forms.IntegerField()
+    dimness = forms.IntegerField(min_value=0, max_value=100)
     # apparently used for checkboxes? This is true and false use
-    #state = forms.BooleanField
+    state = forms.BooleanField()
     # need something that can check a list of colors that can be a drop down
     # or a list that is here? maybe checkconstraint? charfield made for now
     color = forms.CharField(max_length=20)
 
     class Meta:
-        model = lightModel.Light
-        fields = ['lightName', 'color']
+        model = Models.Light
+        fields = ['lightName', 'state', 'dimness', 'color']

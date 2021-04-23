@@ -63,9 +63,9 @@ class Light(models.Model):
     lightName = models.CharField(max_length=20)
     #lightType = models.CharField(max_length=256, choices=[('floor lamp','floor lamp'), ('table lamp', 'table lamp'),
      #                                                   ('ceiling light', 'ceiling light')])
-    #dimness = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    dimness = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     # apparently used for checkboxes? This is true and false use
-    #state = models.BooleanField
+    state = models.BooleanField(default=0)
     #need something that can check a list of colors that can be a drop down
     # or a list that is here? maybe checkconstraint? charfield made for now
     color = models.CharField(max_length=20)
