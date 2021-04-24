@@ -32,6 +32,8 @@ urlpatterns = [
     # SET User Registration Page
     path('register/', user_views.register, name='register'),
     path('addLights/', user_views.lightsForm, name="add-lights"),
+    path('addLocks/', user_views.locksForm, name="add-locks"),
+    path('addAlarm/', user_views.alarmForm, name="add-alarm"),
     # Log In View
     path('login/', auth_views.LoginView.as_view(template_name='homepg/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='homepg/logout.html'), name='logout'),

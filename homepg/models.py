@@ -58,7 +58,8 @@ class Light(models.Model):
 
     #roomLoc = models.CharField(max_length=20)
     #light_types = ['Floor Lamp', 'Table Lamp', 'Ceiling Light']
-    #roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+    ###roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE)
 
     lightName = models.CharField(max_length=20)
     #lightType = models.CharField(max_length=256, choices=[('floor lamp','floor lamp'), ('table lamp', 'table lamp'),
@@ -83,11 +84,11 @@ class Light(models.Model):
 class Lock(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     lockName = models.CharField(max_length=20)
-    state = models.BooleanField
-    code1 = models.CharField(max_length=4)
-    code2 = models.CharField(max_length=4)
-    code3 = models.CharField(max_length=4)
-    code4 = models.CharField(max_length=4)
+    state = models.BooleanField(default=0)
+    code1 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    code3 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    code4 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     #create a dunder method to control how we want this to printed out
     def __str__(self):
         return self.lockName
@@ -95,11 +96,11 @@ class Lock(models.Model):
 class Alarm(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     alarmName = models.CharField(max_length=20)
-    state = models.BooleanField
-    code1 = models.CharField(max_length=4)
-    code2 = models.CharField(max_length=4)
-    code3 = models.CharField(max_length=4)
-    code4 = models.CharField(max_length=4)
+    state = models.BooleanField(default=0)
+    code1 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    code3 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    code4 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     #create a dunder method to control how we want this to printed out
     def __str__(self):
         return self.alarmName
