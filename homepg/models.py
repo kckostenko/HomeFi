@@ -56,14 +56,14 @@ class Light(models.Model):
     #with that room tag will show only which is why the room is added here instaed of in
     #the nested dictionaries and classes like in other data model
 
-    #roomLoc = models.CharField(max_length=20)
-    #light_types = ['Floor Lamp', 'Table Lamp', 'Ceiling Light']
+    #roomLoc = models.CharField(default='', max_length=20)
+    #roomLoc = models.ModelChoiceField(queryset=Room.objects.all(), label='Room Location')
 
-    ###roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE)
+    #does it need to be a foreign key or can it just be a char field?
+    roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
 
     lightName = models.CharField(max_length=20)
-    #lightType = models.CharField(max_length=256, choices=[('floor lamp','floor lamp'), ('table lamp', 'table lamp'),
-     #                                                   ('ceiling light', 'ceiling light')])
+    lightType = models.CharField(default='default light', max_length=20, choices=[('default light','default light'),('floor lamp','floor lamp'), ('table lamp', 'table lamp'), ('ceiling light', 'ceiling light')])
     dimness = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     # apparently used for checkboxes? This is true and false use
     state = models.BooleanField(default=0)
@@ -84,6 +84,8 @@ class Light(models.Model):
 class Lock(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     lockName = models.CharField(max_length=20)
+    roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
+    #roomLoc = models.CharField(default='', max_length=20)
     state = models.BooleanField(default=0)
     code1 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])

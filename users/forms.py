@@ -20,38 +20,29 @@ class UserRegisterForm(UserCreationForm):
 
 
 class addLights(forms.Form):
-    #room name need to be the real rooms names so need to make these a query
-    #ROOM_NAMES = [("living room", "living room")]
-    #roomLoc = forms.CharField(label="Room Location: ", widget=forms.Select(choices=ROOM_NAMES))
-
-    #light_types = ['Floor Lamp', 'Table Lamp', 'Ceiling Light']
-
-    #do i need to add the user who is accessing this?
-    ##roomLoc = forms.ModelChoiceField(Models.Room)
-
+    #order it by the user as well? like the id or whatever somehow?
+    #check all of the querying possibilities that wrote down as to how to be specfiic
+    # do we need to filter thruogh using the current user?
     lightName = forms.CharField(max_length=20, label='Light Name')
-    #lightType = forms.CharField(max_length=256)
-    # , choices=[('floor lamp', 'floor lamp'), ('table lamp', 'table lamp'),
-    #                                                          ('ceiling light', 'ceiling light')]
-    dimness = forms.IntegerField(initial=0, min_value=0, max_value=100, label='Dimness')
+    roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
+    lightType = forms.CharField(max_length=20,label='Light Type', widget=forms.Select(choices=[('default light','default light'),
+                                                                                               ('floor lamp','floor lamp'),
+                                                                                                ('table lamp', 'table lamp'),
+                                                                                                ('ceiling light', 'ceiling light')]))
+    dimness = forms.IntegerField(initial=0, min_value=0, max_value=100, label='Dimness', required=False)
     state = forms.BooleanField(required=False, label='ON/OFF')
     # need something that can check a list of colors that can be a drop down
     # or a list that is here? maybe checkconstraint of if its a color or not?
 
     #initial='yellow' for a default color?
-    color = forms.CharField(max_length=20, label='Color')
-
+    color = forms.CharField(max_length=20, label='Color', required=False)
     class Meta:
         model = Models.Light
-        fields = ['lightName', 'state', 'dimness', 'color']
+        fields = ['lightName', 'roomLoc', 'lightType', 'state', 'dimness', 'color']
 
 class addLocks(forms.Form):
-    # roomLoc = models.CharField(max_length=20)
-    #ROOM_NAMES = [("living room", "living room")]
-
     lockName = forms.CharField(min_length=2, max_length=20, label='Lock Name')
-    # roomLoc = forms.ForeignKey(Room, on_delete=models.CASCADE)
-    #roomLoc = forms.CharField(label="Room Location: ", widget=forms.Select(choices=ROOM_NAMES))
+    roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
     state = forms.BooleanField(required=False, label='LOCKED/UNLOCKED')
     code1 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='First Code')
     code2 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Second Code')
@@ -59,7 +50,7 @@ class addLocks(forms.Form):
     code4 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Fourth Code')
     class Meta:
         model = Models.Lock
-        fields = ['lockName', 'state', 'code1', 'code2', 'code3', 'code4']
+        fields = ['lockName', 'roomLoc', 'state', 'code1', 'code2', 'code3', 'code4']
 
 class addAlarm(forms.Form):
     alarmName = forms.CharField(min_length=2, max_length=20, label='Alarm Name')

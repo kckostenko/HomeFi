@@ -43,7 +43,8 @@ def lightsForm(request):
             # will tell us if form valid when submitted
             # form.cleaned_data is a DICTIONARY
             lightsObj.lightName = form.cleaned_data['lightName']
-            ##lightsObj.roomLoc = form.cleaned_data['roomLoc']
+            lightsObj.roomLoc = form.cleaned_data['roomLoc']
+            lightsObj.lightType = form.cleaned_data['lightType']
             lightsObj.color = form.cleaned_data['color']
             lightsObj.dimness = form.cleaned_data['dimness']
             lightsObj.state = form.cleaned_data['state']
@@ -68,12 +69,11 @@ def locksForm(request):
         form = addLocks(request.POST)
         if form.is_valid():
             locksObj = Model.Lock()
-
             # will tell us if form valid when submitted
             # form.cleaned_data is a DICTIONARY
             locksObj.lockName = form.cleaned_data['lockName']
             locksObj.state = form.cleaned_data['state']
-
+            locksObj.roomLoc = form.cleaned_data['roomLoc']
             ##lightsObj.roomLoc = form.cleaned_data['roomLoc']
             locksObj.code1 = form.cleaned_data['code1']
             locksObj.code2 = form.cleaned_data['code2']
