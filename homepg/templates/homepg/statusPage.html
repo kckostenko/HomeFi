@@ -21,18 +21,51 @@
 		{% load static %} <img src="{% static 'images/home3.jpg' %}" alt="Home" style="width:100%">
 		<div class="w3-display-topleft w3-text-pink" style="padding:24px 48px">
 			<h1 class="w3-jumbo w3-hide-small">New Devices</h1>
+
+            <p> ALARMS: </p>
+            {% for alarm in alarms %}
+                <p> {{ alarm.alarmName }} </p>
+                {% if alarm.state == True %}
+                    <p> ARMED </p>
+                {% else %}
+                    <p> DISARMED </p>
+                {% endif %}
+            {% endfor %} <!-- Alarms for loop -->
+
             {% for room in rooms %}
                 <p> {{ room.roomName }} </p>
+                <p> LIGHTS: </p>
                     {% for light in lights%}
                         {% if room.id == light.roomLoc.id %}
                             <p> {{ light.roomLoc.id }}: {{ room.id}}</p>
                             <p> {{ light.lightName }} </p>
-                            <p> {{ light.roomLoc }}: {{ light.lightType}}</p>
-                            <p> {{ light.state }}: {{ light.dimness}}</p>
+                            <p> {{ light.roomLoc }} </p>
+                            <p> {{ light.lightType}}</p>
+                            <p> {{ light.dimness}} </p>
+                            {% if light.state == True %}
+                                <p> ON </p>
+                            {% else %}
+                                <p> OFF </p>
+                            {% endif %}
                             <p> {{ light.color }}</p>
-                            <p> &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; </p>
                         {% endif %} 	<!-- roomname == light roomloc if statement -->
-                {% endfor %}	<!-- Lights for loop -->
+                    {% endfor %}	<!-- Lights for loop -->
+            <p> &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; </p>
+
+                    <p> LOCKS: </p>
+                    {% for lock in locks%}
+                        {% if room.id == lock.roomLoc.id %}
+                            <p> {{ lock.roomLoc.id }}: {{ room.id}}</p>
+                            <p> {{ lock.lockName }} </p>
+                            <p> {{ lock.roomLoc }} </p>
+                            {% if lock.state == True %}
+                                <p> LOCKED </p>
+                            {% else %}
+                                <p> UNLOCKED </p>
+                        {% endif %}
+                    {% endif %} 	<!-- roomname == lock roomloc if statement -->
+                {% endfor %}	<!-- Locks for loop -->
+            <p> &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; </p>
             {% endfor %} 	<!-- Rooms for loop -->
 			<!-- <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p> -->
 		</div>

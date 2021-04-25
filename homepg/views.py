@@ -32,22 +32,15 @@ def home(request):
     return render(request, "homepg/home.html")
 
 def status(request):
-    dictRooms = {
-        'rooms': Room.objects.all(),
-        'lights': Light.objects.all(),
-        'locks': Lock.objects.all(),
+
+    dbEntries = {
+        'rooms': Room.objects.filter(owner=request.user),
+        'lights': Light.objects.filter(owner=request.user),
+        'locks': Lock.objects.filter(owner=request.user),
+        'alarms': Alarm.objects.filter(owner=request.user),
     }
 
-    ''' 
-       dictRooms2 = {}
-    
-        rooms = Room.objects.all()
-        for room in rooms:
-            newLights = Light.objects.all().filter(roomLoc=room.roomName)
-            dictRooms2[room.roomName] = newLights
-    '''
-
-    return render(request, "homepg/statusPage.html", dictRooms)
+    return render(request, "homepg/statusPage.html", dbEntries)
 
 
 def about(request):
