@@ -11,6 +11,7 @@ urlpatterns = [
     # it has already chopped off "127.0.0.1/home" leaving ONLY "about/"...
     # It's all about that nesting BAYYY-BEEEE **finger guns**
     path("about/", views.about, name="business-about"),
+    path("status/", views.status, name="status-page"),
     path("login/", views.login, name="user-login"),
     path("shop/", views.shop, name="business-shop"),
     path("smarthome/", views.smarthome, name="smart-home"),

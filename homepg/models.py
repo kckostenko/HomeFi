@@ -16,19 +16,19 @@ class Post(models.Model):
     # only of auto_now_add but to change as an option then use
     # default=timezone.now
     date_posted = models.DateTimeField(default=timezone.now)
-    #now need the user for the author so get that from other table and add
+    # now need the user for the author so get that from other table and add
     # the place up above- on delete says if user deleted if delete post too
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    #create a dunder method to control how we want this to printed out
+    # create a dunder method to control how we want this to printed out
     def __str__(self):
         return self.title
-
 
 class SmartHome(models.Model):
     houseName = models.CharField(max_length=20)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    #create a dunder method to control how we want this to printed out
+    # create a dunder method to control how we want this to printed out
+
     def __str__(self):
         return self.houseName
 
@@ -36,62 +36,51 @@ class SmartHome(models.Model):
 # lights or anything since rooms will be drop down with options? this way
 # the rooms field will always be filled out in the DB, need this to know where
 
-#also can make a query for all and get them all and then add them into a text box
+# also can make a query for all and get them all and then add them into a text box
 # drop down thing for rooms with this owner etc
 class Room(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     roomName = models.CharField(max_length=20)
-    #create a dunder method to control how we want this to printed out
+    # create a dunder method to control how we want this to printed out
+
     def __str__(self):
         return self.roomName
 
-
 class Light(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    #here is also chosen by drop down of the rooms that are available to choose since they
-    #were added in the beginning, so these are the only options - so query to get room list
-    #with this user then add to the drop down and choose and add it here
-    #then when choosing a room, once chosen that can be queried so that all that match here
-    #with that room tag will show only which is why the room is added here instaed of in
-    #the nested dictionaries and classes like in other data model
-
-    #roomLoc = models.CharField(default='', max_length=20)
-    #roomLoc = models.ModelChoiceField(queryset=Room.objects.all(), label='Room Location')
-
-    #does it need to be a foreign key or can it just be a char field?
+    # does it need to be a foreign key or can it just be a char field?
     roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
-
     lightName = models.CharField(max_length=20)
     lightType = models.CharField(default='default light', max_length=20, choices=[('default light','default light'),('floor lamp','floor lamp'), ('table lamp', 'table lamp'), ('ceiling light', 'ceiling light')])
     dimness = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     # apparently used for checkboxes? This is true and false use
     state = models.BooleanField(default=0)
-    #need something that can check a list of colors that can be a drop down
+    # need something that can check a list of colors that can be a drop down
     # or a list that is here? maybe checkconstraint? charfield made for now
     color = models.CharField(max_length=20)
-    #create a dunder method to control how we want this to printed out
+    # create a dunder method to control how we want this to printed out
+
     def __str__(self):
         return self.lightName
-    #maybe how to get the objects from another class? by query: models.QuerySet()
+    # maybe how to get the objects from another class? by query: models.QuerySet()
 
 
-#not sure how to add a list so there can be a list of codes to choose from or add?
-#will this be its own class for the codes? or can you make a list? or add a code at a time and
-#check that against the lock name so if the code matches then the lock has that code as
-#well as others so many locks but code is what is different in table
+# not sure how to add a list so there can be a list of codes to choose from or add?
+# will this be its own class for the codes? or can you make a list? or add a code at a time and
+# check that against the lock name so if the code matches then the lock has that code as
+# well as others so many locks but code is what is different in table
 
 class Lock(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     lockName = models.CharField(max_length=20)
     roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
-    #roomLoc = models.CharField(default='', max_length=20)
     state = models.BooleanField(default=0)
     code1 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code3 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code4 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
-    #create a dunder method to control how we want this to printed out
+    # create a dunder method to control how we want this to printed out
+
     def __str__(self):
         return self.lockName
 
@@ -103,7 +92,8 @@ class Alarm(models.Model):
     code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code3 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code4 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
-    #create a dunder method to control how we want this to printed out
+    # create a dunder method to control how we want this to printed out
+
     def __str__(self):
         return self.alarmName
 

@@ -1,0 +1,42 @@
+{% extends "homepg/base.html" %}
+{% block content %}
+  <!-- Image header -->
+	<!-- Top header -->
+	<header class="w3-container w3-xlarge">
+		<p class="w3-left">Homepage</p>
+		<p class="w3-right">
+			<table>
+				<tr>
+					<td>{% load static %}<img class="w3-icons" src="{% static 'images/UserIcon.png' %}" alt="Account Icon" style="float: right" /> </td>
+					{% if user.is_authenticated %}
+						<td style="font-size: 15px;padding:10px"> {{user.username}}</td>
+					{% else %}
+						<td style="font-size: 15px;padding:10px"> Guest </td>
+					{% endif %}
+				</tr>
+			</table>
+		</p>
+	</header>
+	<div class="w3-display-container w3-container">
+		{% load static %} <img src="{% static 'images/home3.jpg' %}" alt="Home" style="width:100%">
+		<div class="w3-display-topleft w3-text-pink" style="padding:24px 48px">
+			<h1 class="w3-jumbo w3-hide-small">New Devices</h1>
+            {% for room in rooms %}
+                <p> {{ room.roomName }} </p>
+                    {% for light in lights%}
+                        {% if room.id == light.roomLoc.id %}
+                            <p> {{ light.roomLoc.id }}: {{ room.id}}</p>
+                            <p> {{ light.lightName }} </p>
+                            <p> {{ light.roomLoc }}: {{ light.lightType}}</p>
+                            <p> {{ light.state }}: {{ light.dimness}}</p>
+                            <p> {{ light.color }}</p>
+                            <p> &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; </p>
+                        {% endif %} 	<!-- roomname == light roomloc if statement -->
+                {% endfor %}	<!-- Lights for loop -->
+            {% endfor %} 	<!-- Rooms for loop -->
+			<!-- <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p> -->
+		</div>
+	</div>
+{% endblock content %}
+<!-- End page content -->
+

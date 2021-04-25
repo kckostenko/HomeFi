@@ -74,7 +74,6 @@ def locksForm(request):
             locksObj.lockName = form.cleaned_data['lockName']
             locksObj.state = form.cleaned_data['state']
             locksObj.roomLoc = form.cleaned_data['roomLoc']
-            ##lightsObj.roomLoc = form.cleaned_data['roomLoc']
             locksObj.code1 = form.cleaned_data['code1']
             locksObj.code2 = form.cleaned_data['code2']
             locksObj.code3 = form.cleaned_data['code3']

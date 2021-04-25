@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Light, Room, Lock, Alarm
 from django.contrib.auth.decorators import login_required
 
 
@@ -27,12 +27,27 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     # run Query on Post Model and run Query on Post
     # NOTE: MUST import POST in the beginning...
-    context = {
-        'posts': Post.objects.all()
-    }
     # need to load in templates here! Use render()
     # render still returns an HTTP Response!
-    return render(request, "homepg/home.html", context)
+    return render(request, "homepg/home.html")
+
+def status(request):
+    dictRooms = {
+        'rooms': Room.objects.all(),
+        'lights': Light.objects.all(),
+        'locks': Lock.objects.all(),
+    }
+
+    ''' 
+       dictRooms2 = {}
+    
+        rooms = Room.objects.all()
+        for room in rooms:
+            newLights = Light.objects.all().filter(roomLoc=room.roomName)
+            dictRooms2[room.roomName] = newLights
+    '''
+
+    return render(request, "homepg/statusPage.html", dictRooms)
 
 
 def about(request):

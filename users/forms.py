@@ -25,6 +25,7 @@ class addLights(forms.Form):
     # do we need to filter thruogh using the current user?
     lightName = forms.CharField(max_length=20, label='Light Name')
     roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
+    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
     lightType = forms.CharField(max_length=20,label='Light Type', widget=forms.Select(choices=[('default light','default light'),
                                                                                                ('floor lamp','floor lamp'),
                                                                                                 ('table lamp', 'table lamp'),
@@ -43,6 +44,7 @@ class addLights(forms.Form):
 class addLocks(forms.Form):
     lockName = forms.CharField(min_length=2, max_length=20, label='Lock Name')
     roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
+    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
     state = forms.BooleanField(required=False, label='LOCKED/UNLOCKED')
     code1 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='First Code')
     code2 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Second Code')
