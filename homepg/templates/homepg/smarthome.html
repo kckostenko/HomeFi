@@ -19,100 +19,128 @@
 	</header>
     <div class="tab">
 	  <button class="tablinks" onclick="openTab(event, 'Entire Home')" id="defaultOpen">Entire Home</button>
-	  <button class="tablinks" onclick="openTab(event, 'Rooms')">Rooms</button>
+	  <button class="tablinks" onclick="openTab(event, 'Rooms')"> Add/Remove Rooms</button>
 	  <button class="tablinks" onclick="openTab(event, 'Lights')">Lights</button>
 		<button class="tablinks" onclick="openTab(event, 'Locks')">Locks</button>
 		<button class="tablinks" onclick="openTab(event, 'Alarm')">Alarm</button>
 	</div>
 
 	<div id="Entire Home" class="tabcontent" style="border:none">
-	  <h3>Status of Home</h3>
-		<h6>Lights</h6>
-		<table class="w3-table w3-table-all">
-			<tr>
-				<th>Room</th>
-				<th>Light Name</th>
-				<th>Status</th>
-				<th>Dim</th>
-				<th>Color</th>
-			</tr>
-			<tr>
-				<td>Living Room</td>
-				<td>Overhead Light</td>
-				<td>On</td>
-				<td> N/A</td>
-				<td>N/A</td>
-			</tr>
-			<tr>
-				<td>Bedroom 1</td>
-				<td>Floor Lamp</td>
-				<td>On</td>
-				<td> N/A</td>
-				<td>Pink</td>
-			</tr>
-		</table>
-		<h6>Locks</h6>
-		<table class="w3-table w3-table-all">
-			<tr>
-				<th>Lock Name</th>
-				<th>Status</th>
-			</tr>
-			<tr>
-				<td>Front Door</td>
-				<td>Unlocked</td>
-			</tr>
-			<tr>
-				<td>Back Door</td>
-				<td>Locked</td>
-			</tr>
-		</table>
-		<h6>Alarm</h6>
-		<table class="w3-table w3-table-all">
+	  <h3 style="font-weight:bold">Status of Home</h3>
+		<p style="font-size:20px">Alarm</p>
+		<table class="w3-table-all">
 			<tr>
 				<th>Alarm</th>
 				<th>Status</th>
 			</tr>
+			{% for alarm in alarms %}
 			<tr>
-				<td>Home Alarm</td>
-				<td>Disarmed</td>
+                <td> {{ alarm.alarmName }} </td>
+                {% if alarm.state == True %}
+                    <td> ARMED </td>
+                {% else %}
+                    <td> DISARMED </td>
+                {% endif %}
 			</tr>
+            {% endfor %} <!-- end Alarms for loop -->
 		</table>
+		<hr style="  border-top: 8px solid #3399cc; border-radius: 5px;" />
+
+
+            {% for room in rooms %}
+                <p style="font-size:20px"> {{ room.roomName }} </p>
+                <p style="font-size:16px; font-weight:bold"> Lights: </p>
+				<table class="w3-table w3-table-all">
+				<tr>
+					<th>Light Name</th>
+					<th> Light Type </th>
+					<th>Status</th>
+					<th>Dim</th>
+					<th>Color</th>
+				</tr>
+                    {% for light in lights%}
+                        {% if room.id == light.roomLoc.id %}
+					<tr>
+                            <td> {{ light.lightName }} </td>
+                            <td> {{ light.lightType}}</td>
+							{% if light.state == True %}
+                                <td> ON </td>
+                            {% else %}
+                                <td> OFF </td>
+                            {% endif %}
+                            <td> {{ light.dimness}} </td>
+                            <td> {{ light.color }}</td>
+					</tr>
+                        {% endif %} 	<!-- roomname == light roomloc if statement -->
+                    {% endfor %}	<!-- Lights for loop -->
+				</table>
+
+				<p style="font-size:16px; font-weight:bold"> Locks: </p>
+					<table class="w3-table w3-table-all">
+					<tr>
+						<th>Lock Name</th>
+						<th> Lock State </th>
+					</tr>
+                    {% for lock in locks%}
+						<tr>
+                        {% if room.id == lock.roomLoc.id %}
+                            <td> {{ lock.lockName }} </td>
+							{% if lock.state == True %}
+								<td> LOCKED </td>
+							{% else %}
+								<td> UNLOCKED </td>
+							{% endif %}
+                    	{% endif %} 	<!-- roomname == lock roomloc if statement -->
+						</tr>
+                {% endfor %}	<!-- Locks for loop -->
+					</table>
+		<hr style="  border-top: 8px solid #3399cc; border-radius: 5px;" />
+            {% endfor %} 	<!-- Rooms for loop -->
 	</div>
 
 	<div id="Rooms" class="tabcontent" style="border:none">
-	  <h3>Status of Rooms</h3>
-	  <p>Coming Soon. </p>
+	  <h3>Add/Remove Room</h3>
+		<p> Select whether to add or remove a room. </p>
+	   <button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-rooms' %}">Add Room</a></button>
+		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'remove-rooms' %}">Remove Room</a></button>
 	</div>
 
 	<div id="Lights" class="tabcontent" style="border:none">
 	  <h3>Status of Lights</h3>
 		<h6>Lights</h6>
+
 		<table class="w3-table w3-table-all">
 			<tr>
 				<th>Room</th>
 				<th>Light Name</th>
+				<th> Light Type </th>
 				<th>Status</th>
 				<th>Dim</th>
 				<th>Color</th>
 			</tr>
-			<tr>
-				<td>Living Room</td>
-				<td>Overhead Light</td>
-				<td>On</td>
-				<td> N/A</td>
-				<td>N/A</td>
-			</tr>
-			<tr>
-				<td>Bedroom 1</td>
-				<td>Floor Lamp</td>
-				<td>On</td>
-				<td> N/A</td>
-				<td>Pink</td>
-			</tr>
+			{% for room in rooms %}
+                    {% for light in lights%}
+						<tr>
+                        {% if room.id == light.roomLoc.id %}
+							<td> {{ light.roomLoc }} </td>
+							<td><p> {{ light.lightName }}</p> </td>
+							<td><p> {{ light.lightType}} </p></td>
+							{% if light.state == True %}
+							<td><p> ON </p></td>
+                            {% else %}
+							<td><p>OFF </p></td>
+                            {% endif %}
+							<td><p> {{ light.dimness}} </p></td>
+							<td><p> {{ light.color }}</p></td>
+
+                        {% endif %} 	<!-- roomname == light roomloc if statement -->
+						</tr>
+                    {% endfor %}	<!-- Lights for loop -->
+			{% endfor %}
 		</table>
 		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-lights' %}">Add Light</a></button>
-		<button class="w3-btn w3-green" style="width:32%">Remove Light</button>
-		<button class="w3-btn w3-light-green" style="width:32%">Change Light Status</button>
+		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'remove-lights' %}">Remove Light</a></button>
+		<button class="w3-btn w3-light-green" style="width:32%"><a href="{% url 'change-lights' %}">Change Light Status</a></button>
 	</div>
 
 	<div id="Locks" class="tabcontent" style="border:none">
@@ -121,19 +149,25 @@
 		<table class="w3-table w3-table-all">
 			<tr>
 				<th>Lock Name</th>
-				<th>Status</th>
+				<th> Lock State </th>
 			</tr>
-			<tr>
-				<td>Front Door</td>
-				<td>Unlocked</td>
-			</tr>
-			<tr>
-				<td>Back Door</td>
-				<td>Locked</td>
-			</tr>
+			{% for room in rooms %}
+				{% for lock in locks%}
+					<tr>
+					{% if room.id == lock.roomLoc.id %}
+						<td> {{ lock.lockName }} </td>
+						{% if lock.state == True %}
+							<td> LOCKED </td>
+						{% else %}
+							<td> UNLOCKED </td>
+						{% endif %}
+					{% endif %} 	<!-- roomname == lock roomloc if statement -->
+					</tr>
+				{% endfor %}	<!-- Locks for loop -->
+            {% endfor %} 	<!-- Rooms for loop -->
 		</table>
 		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-locks' %}">Add Lock</a></button>
-		<button class="w3-btn w3-green" style="width:32%">Remove Lock</button>
+		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'remove-locks' %}">Remove Lock</a></button>
 		<button class="w3-btn w3-light-green" style="width:32%">Change Lock Status</button>
 	</div>
 
@@ -145,14 +179,22 @@
 				<th>Alarm</th>
 				<th>Status</th>
 			</tr>
+			{% for alarm in alarms %}
 			<tr>
-				<td>Home Alarm</td>
-				<td>Disarmed</td>
+                <td> {{ alarm.alarmName }} </td>
+                {% if alarm.state == True %}
+                    <td> ARMED </td>
+                {% else %}
+                    <td> DISARMED </td>
+                {% endif %}
 			</tr>
+            {% endfor %} <!-- Alarms for loop -->
 		</table>
 		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-alarm' %}">Add Alarm</a></button>
+		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'check-alarm-pin' %}">Change Alarm</a></button>
 	</div>
 
+	<!-- the JavaScript to get the tabs to work correctly -->
 	<script>
 	function openTab(evt, tabName) {
 	  var i, tabcontent, tablinks;

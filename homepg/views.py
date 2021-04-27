@@ -31,8 +31,8 @@ def home(request):
     # render still returns an HTTP Response!
     return render(request, "homepg/home.html")
 
-def status(request):
 
+def status(request):
     dbEntries = {
         'rooms': Room.objects.filter(owner=request.user),
         'lights': Light.objects.filter(owner=request.user),
@@ -40,7 +40,8 @@ def status(request):
         'alarms': Alarm.objects.filter(owner=request.user),
     }
 
-    return render(request, "homepg/statusPage.html", dbEntries)
+    # return render(request, "homepg/statusPage.html", dbEntries)
+    return render(request, "homepg/smarthome.html", dbEntries)
 
 
 def about(request):

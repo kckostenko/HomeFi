@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 # inherits from the above models class so in the parenthesis below
 class Post(models.Model):
     # now create attributes and so each is a different field in DB
@@ -24,13 +25,16 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
 class SmartHome(models.Model):
     houseName = models.CharField(max_length=20)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
     # create a dunder method to control how we want this to printed out
 
     def __str__(self):
         return self.houseName
+
 
 # have to fill out room name first after making name for house or cannot add
 # lights or anything since rooms will be drop down with options? this way
@@ -41,23 +45,28 @@ class SmartHome(models.Model):
 class Room(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     roomName = models.CharField(max_length=20)
+
     # create a dunder method to control how we want this to printed out
 
     def __str__(self):
         return self.roomName
+
 
 class Light(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     # does it need to be a foreign key or can it just be a char field?
     roomLoc = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     lightName = models.CharField(max_length=20)
-    lightType = models.CharField(default='default light', max_length=20, choices=[('default light','default light'),('floor lamp','floor lamp'), ('table lamp', 'table lamp'), ('ceiling light', 'ceiling light')])
+    lightType = models.CharField(default='default light', max_length=20,
+                                 choices=[('default light', 'default light'), ('floor lamp', 'floor lamp'),
+                                          ('table lamp', 'table lamp'), ('ceiling light', 'ceiling light')])
     dimness = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     # apparently used for checkboxes? This is true and false use
     state = models.BooleanField(default=0)
     # need something that can check a list of colors that can be a drop down
     # or a list that is here? maybe checkconstraint? charfield made for now
     color = models.CharField(max_length=20)
+
     # create a dunder method to control how we want this to printed out
 
     def __str__(self):
@@ -79,10 +88,12 @@ class Lock(models.Model):
     code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code3 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code4 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+
     # create a dunder method to control how we want this to printed out
 
     def __str__(self):
         return self.lockName
+
 
 class Alarm(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -92,11 +103,11 @@ class Alarm(models.Model):
     code2 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code3 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     code4 = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+
     # create a dunder method to control how we want this to printed out
 
     def __str__(self):
         return self.alarmName
-
 
 
 '''

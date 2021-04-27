@@ -3,7 +3,7 @@
 {% block content %}
 	<!-- Top header -->
 	<header class="w3-container w3-xlarge">
-		<p class="w3-left">Add New Lock</p>
+		<p class="w3-left">Remove Lock</p>
 		<p class="w3-right">
 			<table>
 				<tr>
@@ -20,18 +20,40 @@
 
     <form method="POST">
       <div class="w3-display-container w3-container">
+<!--		  <table class="w3-table w3-table-all">-->
+<!--							<tr>-->
+<!--								<th>Lock Name</th>-->
+<!--								<th> Lock State </th>-->
+<!--							</tr>-->
+<!--				{% for room in rooms %}-->
+<!--					{% for lock in locks%}-->
+<!--						<tr>-->
+<!--						{% if room.id == lock.roomLoc.id %}-->
+<!--			&lt;!&ndash;                            <p> {{ lock.roomLoc.id }}: {{ room.id}}</p>&ndash;&gt;-->
+<!--							<td> {{ lock.lockName }} </td>-->
+<!--			&lt;!&ndash;                            <p> {{ lock.roomLoc }} </p>&ndash;&gt;-->
+<!--							{% if lock.state == True %}-->
+<!--								<td> LOCKED </td>-->
+<!--							{% else %}-->
+<!--								<td> UNLOCKED </td>-->
+<!--							{% endif %}-->
+<!--						{% endif %} 	&lt;!&ndash; roomname == lock roomloc if statement &ndash;&gt;-->
+<!--						</tr>-->
+<!--					{% endfor %}	&lt;!&ndash; Locks for loop &ndash;&gt;-->
+<!--				{% endfor %} 	&lt;!&ndash; Rooms for loop &ndash;&gt;-->
+<!--			</table>-->
 <!--        {% load static %} <img src="{% static 'images/home1.jpg' %}" alt="home" style="width:100%" />-->
 <!--          <div class="centered" style="background-color:darkslategrey;padding:24px;">-->
               {% csrf_token %}
               <fieldset class="form-group" style="font-size:20px">
-                  <legend class="border-bottom mb-4" style="font-size:20px, p">Enter New Lock Information </legend>
-                  {{ form|crispy }}
+                  <legend class="border-bottom mb-4" style="font-size:20px">Enter Lock Information for Removal </legend>
+				  {{ form|crispy }}
               </fieldset>
 <!--            <label for="uname" style="font-size:30px;color:azure"><b>Username</b></label>-->
 <!--            <input type="text" placeholder="Enter Username" name="uname" required>-->
 <!--            <label for="psw" style="font-size:30px;color:azure"><b>Password</b></label>-->
 <!--            <input type="password" placeholder="Enter Password" name="psw" required>-->
-            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Add New Lock</button>
+            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Remove Lock</button>
             <!-- <label>
               <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>

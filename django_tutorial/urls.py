@@ -31,9 +31,16 @@ urlpatterns = [
 
     # SET User Registration Page
     path('register/', user_views.register, name='register'),
+    path('addRooms/', user_views.addRoom, name="add-rooms"),
+    path('removeRooms/', user_views.removeRoom, name="remove-rooms"),
     path('addLights/', user_views.lightsForm, name="add-lights"),
+    path('removeLights/', user_views.deleteLightsForm, name="remove-lights"),
+    path('changeLights/', user_views.changeLights, name="change-lights"),
     path('addLocks/', user_views.locksForm, name="add-locks"),
+    path('removeLocks/', user_views.deleteLocksForm, name="remove-locks"),
     path('addAlarm/', user_views.alarmForm, name="add-alarm"),
+    path('checkAlarmPin/', user_views.correctAlarmPin, name="check-alarm-pin"),
+    path('changeAlarm/',user_views.changeAlarm, name="change-alarm"),
     # Log In View
     path('login/', auth_views.LoginView.as_view(template_name='homepg/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='homepg/logout.html'), name='logout'),

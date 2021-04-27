@@ -3,7 +3,7 @@
 {% block content %}
 	<!-- Top header -->
 	<header class="w3-container w3-xlarge">
-		<p class="w3-left">Add New Lock</p>
+		<p class="w3-left">Remove Room</p>
 		<p class="w3-right">
 			<table>
 				<tr>
@@ -24,15 +24,15 @@
 <!--          <div class="centered" style="background-color:darkslategrey;padding:24px;">-->
               {% csrf_token %}
               <fieldset class="form-group" style="font-size:20px">
-                  <legend class="border-bottom mb-4" style="font-size:20px, p">Enter New Lock Information </legend>
+                  <legend class="border-bottom mb-4" style="font-size:20px, p">Remove Room </legend>
                   {{ form|crispy }}
               </fieldset>
 <!--            <label for="uname" style="font-size:30px;color:azure"><b>Username</b></label>-->
 <!--            <input type="text" placeholder="Enter Username" name="uname" required>-->
 <!--            <label for="psw" style="font-size:30px;color:azure"><b>Password</b></label>-->
 <!--            <input type="password" placeholder="Enter Password" name="psw" required>-->
-            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Add New Lock</button>
-            <!-- <label>
+            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Remove Room</button>
+		  	<!-- <label>
               <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
             -->
