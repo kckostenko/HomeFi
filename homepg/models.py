@@ -4,6 +4,9 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+def requesting(request):
+    currentOwner = request.user
+    return currentOwner
 
 # inherits from the above models class so in the parenthesis below
 class Post(models.Model):

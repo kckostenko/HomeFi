@@ -58,7 +58,7 @@ def lightsForm(request):
             return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
-        form = addLights()
+        form = addLights(user=request.user)
 
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm

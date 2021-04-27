@@ -20,12 +20,17 @@ class UserRegisterForm(UserCreationForm):
 
 
 class addLights(forms.Form):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(addLights, self).__init__(*args, **kwargs)
+        self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
+
     #order it by the user as well? like the id or whatever somehow?
     #check all of the querying possibilities that wrote down as to how to be specfiic
     # do we need to filter thruogh using the current user?
     lightName = forms.CharField(max_length=20, label='Light Name')
-    roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
-    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
+    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
+    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=user.id), label='Room Location')
     lightType = forms.CharField(max_length=20,label='Light Type', widget=forms.Select(choices=[('default light','default light'),
                                                                                                ('floor lamp','floor lamp'),
                                                                                                 ('table lamp', 'table lamp'),
