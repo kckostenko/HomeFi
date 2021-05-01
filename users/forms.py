@@ -23,8 +23,9 @@ class addLights(forms.Form):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         super(addLights, self).__init__(*args, **kwargs)
-        self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
+        self.fields['roomLoc'] = forms.ModelChoiceField(Models.Room.objects.filter(owner=user), label='Room Location')
 
+    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
     #order it by the user as well? like the id or whatever somehow?
     #check all of the querying possibilities that wrote down as to how to be specfiic
     # do we need to filter thruogh using the current user?
@@ -47,13 +48,21 @@ class addLights(forms.Form):
         fields = ['lightName', 'roomLoc', 'lightType', 'state', 'dimness', 'color']
 
 class removeLights(forms.Form):
-    lightName = forms.ModelChoiceField(queryset=Models.Light.objects.all(), label="Light Name")
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(removeLights, self).__init__(*args, **kwargs)
+        self.fields['lightName'] = forms.ModelChoiceField(queryset=Models.Light.objects.filter(owner=None) | Models.Light.objects.filter(owner=user), label="Light Name")
+
     class Meta:
         model = Models.Light
 
 class addLocks(forms.Form):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(addLocks, self).__init__(*args, **kwargs)
+        self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
+
     lockName = forms.CharField(min_length=2, max_length=20, label='Lock Name')
-    roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
     #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
     state = forms.BooleanField(required=False, label='LOCKED/UNLOCKED')
     code1 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='First Code')
@@ -66,7 +75,11 @@ class addLocks(forms.Form):
 
 
 class removeLocks(forms.Form):
-    lockName = forms.ModelChoiceField(queryset=Models.Lock.objects.all(), label="Lock Name")
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(removeLocks, self).__init__(*args, **kwargs)
+        self.fields['lockName'] = forms.ModelChoiceField(queryset=Models.Lock.objects.filter(owner=None) | Models.Lock.objects.filter(owner=user), label="Lock Name")
+
     # lockName = forms.CharField(max_length=20,label='Lock Name', widget=forms.Select(choices=[('lock1','lock1'),
     #                                                                                            ('lock1','lock1')]))
     #lockName = forms.CharField(min_length=2, max_length=20, label="Lock Name")
@@ -97,7 +110,11 @@ class changeAlarmForm(forms.Form):
         model = Models.Alarm
 
 class alarmPin(forms.Form):
-    alarmName = forms.ModelChoiceField(queryset=Models.Alarm.objects.all(), label="Alarm Name")
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(alarmPin, self).__init__(*args, **kwargs)
+        self.fields['alarmName'] = forms.ModelChoiceField(queryset=Models.Alarm.objects.filter(owner=None) | Models.Alarm.objects.filter(owner=user), label="Alarm Name")
+
     entryPin = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Enter PIN Code')
 
     class Meta:
@@ -109,14 +126,21 @@ class addRoomForm(forms.Form):
         model = Models.Room
 
 class deleteRoomForm(forms.Form):
-    roomName = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label="Room Name")
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(deleteRoomForm, self).__init__(*args, **kwargs)
+        self.fields['roomName'] = forms.ModelChoiceField(queryset=Models.Alarm.objects.filter(owner=None) | Models.Alarm.objects.filter(owner=user), label="Room Name")
 
     class Meta:
         model = Models.Room
 
 class changeLightForm(forms.Form):
-    lightName = forms.ModelChoiceField(queryset=Models.Light.objects.all(), label="Light Name")
-    roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(changeLightForm, self).__init__(*args, **kwargs)
+        self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
+        self.fields['lightName'] = forms.ModelChoiceField(queryset=Models.Light.objects.filter(owner=None) | Models.Light.objects.filter(owner=user), label="Light Name")
+
     #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.get(owner=Models.Light.owner.id), label='Room Location')
     # roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
     lightType = forms.CharField(max_length=20, label='Light Type',

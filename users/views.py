@@ -39,7 +39,7 @@ def lightsForm(request):
         # NOTE: must import UserCreationForm at top
 
         # if get post request will create form that has request.POST data!
-        form = addLights(request.POST)
+        form = addLights(request.POST, user=request.user)
         if form.is_valid():
             # form.save()
             lightsObj = Model.Light()
@@ -71,7 +71,7 @@ def deleteLightsForm(request):
         # NOTE: must import UserCreationForm at top
 
         # if get post request will create form that has request.POST data!
-        form = removeLights(request.POST)
+        form = removeLights(request.POST, user=request.user)
         if form.is_valid():
             lightsObj = Model.Light()
             # will tell us if form valid when submitted
@@ -86,7 +86,7 @@ def deleteLightsForm(request):
             return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
-        form = removeLights()
+        form = removeLights(user=request.user)
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
     return render(request, 'users/removeLights.html', {'form': form})
@@ -98,7 +98,7 @@ def locksForm(request):
         # NOTE: must import UserCreationForm at top
 
         # if get post request will create form that has request.POST data!
-        form = addLocks(request.POST)
+        form = addLocks(request.POST, user=request.user)
         # form.roomLoc.queryset = Model.Room.filter(user=user_id.id)
         if form.is_valid():
             locksObj = Model.Lock()
@@ -117,7 +117,7 @@ def locksForm(request):
             return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
-        form = addLocks()
+        form = addLocks(user=request.user)
 
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
@@ -130,7 +130,7 @@ def deleteLocksForm(request):
         # NOTE: must import UserCreationForm at top
 
         # if get post request will create form that has request.POST data!
-        form = removeLocks(request.POST)
+        form = removeLocks(request.POST, user=request.user)
         if form.is_valid():
             lockObj = Model.Lock()
 
@@ -158,7 +158,7 @@ def deleteLocksForm(request):
                 messages.info(request, 'Lock ' + str(lockObj.lockName) + ' PIN incorrect!')
     else:
         # if not POST request, will create a blank form!
-        form = removeLocks()
+        form = removeLocks(user=request.user)
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
     return render(request, 'users/removeLocks.html', {'form': form})
@@ -195,7 +195,7 @@ def alarmForm(request):
 
 def correctAlarmPin(request):
     if request.method == "POST":
-        form = alarmPin(request.POST)
+        form = alarmPin(request.POST, user=request.user)
         if form.is_valid():
             alarmObj = Model.Alarm()
             # will tell us if form valid when submitted
@@ -223,7 +223,7 @@ def correctAlarmPin(request):
                 messages.info(request, 'Pin code for ' + str(alarmObj.alarmName) + ' PIN incorrect!')
     else:
         # if not POST request, will create a blank form!
-        form = alarmPin()
+        form = alarmPin(user=request.user)
 
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
@@ -293,7 +293,7 @@ def addRoom(request):
 
 def removeRoom(request):
     if request.method == "POST":
-        form = deleteRoomForm(request.POST)
+        form = deleteRoomForm(request.POST, user=request.user)
         if form.is_valid():
             roomObj = Model.Room()
             # will tell us if form valid when submitted
@@ -306,7 +306,7 @@ def removeRoom(request):
             return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
-        form = deleteRoomForm()
+        form = deleteRoomForm(user=request.user)
     return render(request, 'users/deleteRoom.html', {'form': form})
 
 def changeLights(request):
@@ -315,7 +315,7 @@ def changeLights(request):
         # NOTE: must import UserCreationForm at top
 
         # if get post request will create form that has request.POST data!
-        form = changeLightForm(request.POST)
+        form = changeLightForm(request.POST, user=request.user)
         if form.is_valid():
             # form.save()
             lightsObj = Model.Light()
@@ -343,7 +343,7 @@ def changeLights(request):
             return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
-        form = changeLightForm()
+        form = changeLightForm(user=request.user)
 
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
