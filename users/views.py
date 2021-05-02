@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm, addLights, addAlarm, addLocks, removeLocks, removeLights, alarmPin, \
-    changeAlarmForm, addRoomForm, deleteRoomForm, changeLightForm
+    changeAlarmForm, addRoomForm, deleteRoomForm, changeLightForm, changeLockForm, lockPin
 from django.forms.models import model_to_dict
+from homepg.models import Post, Light, Room, Lock, Alarm
 
 # many possible types of django messages. Error, Success, Warning, Info, Debug...
 
@@ -155,13 +156,93 @@ def deleteLocksForm(request):
                 messages.success(request, 'Lock ' + str(lockObj.lockName) + ' deleted!')
                 return redirect("status-page")
             else:
-                messages.info(request, 'Lock ' + str(lockObj.lockName) + ' PIN incorrect!')
+                messages.error(request, 'Lock ' + str(lockObj.lockName) + ' PIN incorrect!')
     else:
         # if not POST request, will create a blank form!
         form = removeLocks(user=request.user)
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
     return render(request, 'users/removeLocks.html', {'form': form})
+
+
+def correctLockPin(request):
+    if request.method == "POST":
+        form = lockPin(request.POST, user=request.user)
+        if form.is_valid():
+            locksObj = Model.Lock()
+            # will tell us if form valid when submitted
+            # form.cleaned_data is a DICTIONARY
+            # will tell us if form valid when submitted
+            # form.cleaned_data is a DICTIONARY
+            locksObj.lockName = form.cleaned_data['lockName']
+            locksObj.entryPin = form.cleaned_data['entryPin']
+            locksObj.owner = request.user
+            # Pull all codes for that lock name from the Data Model...
+            allCodes = Model.Lock.objects.filter(lockName=locksObj.lockName)
+            # Need to extract each code using its field name (Ex: code1, code2, etc. etc.)
+            # Saves as a QuerySet list with one element. The [0] extracts that one element
+            code1 = allCodes.values_list('code1', flat=True)[0]
+            code2 = allCodes.values_list('code2', flat=True)[0]
+            code3 = allCodes.values_list('code3', flat=True)[0]
+            code4 = allCodes.values_list('code4', flat=True)[0]
+            # alarmObj.save()
+            codeList = [code1, code2, code3, code4]
+            # if user's entry matches one of the four codes
+            if locksObj.entryPin in codeList:
+                messages.success(request, 'PIN code for ' + str(locksObj.lockName) + ' correct!')
+                return redirect("change-lock")
+            else:
+                messages.info(request, 'Pin code for ' + str(locksObj.lockName) + ' incorrect!')
+    else:
+        # if not POST request, will create a blank form!
+        form = lockPin(user=request.user)
+
+    # users/registers.html is TEMPLATE
+    # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
+    return render(request, 'users/lockPinCheck.html', {'form': form})
+
+
+def changeLock(request):
+    if request.method == "POST":
+        # if get post request will create form that has request.POST data!
+        form = changeLockForm(request.POST, user=request.user)
+        if form.is_valid():
+            locksObj = Model.Lock()
+            # will tell us if form valid when submitted
+            # form.cleaned_data is a DICTIONARY
+            tempBool = form.cleaned_data['newNameBool']
+            if tempBool:
+                locksObj.lockName = form.cleaned_data['newLockName']
+            elif not tempBool:
+                locksObj.lockName = form.cleaned_data['lockName']
+            else:
+                print("WHOOPSIE! clearly I coded something wrong wtf")
+
+            locksObj.state = form.cleaned_data['state']
+            locksObj.roomLoc = form.cleaned_data['roomLoc']
+            locksObj.code1 = form.cleaned_data['code1']
+            locksObj.code2 = form.cleaned_data['code2']
+            locksObj.code3 = form.cleaned_data['code3']
+            locksObj.code4 = form.cleaned_data['code4']
+            locksObj.owner = request.user
+            # get the old alarm name
+            allCodes = Model.Lock.objects.filter(owner_id=request.user)
+            # old Alarm Name
+            currentName = allCodes.values_list('lockName', flat=True)[0]
+            # if the old alarm name and new alarm name aren't equal...
+            # delete the old alarm entry
+            entry = Model.Lock.objects.get(lockName=str(currentName))
+            entry.delete()
+            # replace it with the new data
+            locksObj.save()
+            messages.success(request, 'Lock ' + str(locksObj.lockName) + ' edited!')
+            return redirect("status-page")
+    else:
+        # if not POST request, will create a blank form!
+        form = changeLockForm(user=request.user)
+    return render(request, 'users/changeLockForm.html', {'form': form,
+                                                         'rooms': Room.objects.filter(owner=request.user),
+                                                         'locks': Lock.objects.filter(owner=request.user)})
 
 
 def alarmForm(request):
@@ -271,7 +352,9 @@ def changeAlarm(request):
     else:
         # if not POST request, will create a blank form!
         form = changeAlarmForm()
-    return render(request, 'users/changeAlarmForm.html', {'form': form})
+    return render(request, 'users/changeAlarmForm.html',
+                  {'form': form, 'rooms': Room.objects.filter(owner=request.user),
+                   'alarms': Alarm.objects.filter(owner=request.user)})
 
 
 def addRoom(request):
@@ -291,6 +374,7 @@ def addRoom(request):
         form = addRoomForm()
     return render(request, 'users/addRoom.html', {'form': form})
 
+
 def removeRoom(request):
     if request.method == "POST":
         form = deleteRoomForm(request.POST, user=request.user)
@@ -308,6 +392,7 @@ def removeRoom(request):
         # if not POST request, will create a blank form!
         form = deleteRoomForm(user=request.user)
     return render(request, 'users/deleteRoom.html', {'form': form})
+
 
 def changeLights(request):
     if request.method == "POST":
@@ -347,4 +432,6 @@ def changeLights(request):
 
     # users/registers.html is TEMPLATE
     # Dictionary {'form': form} has key of variable form, and value is new instance of UserCreationForm
-    return render(request, 'users/changeLights.html', {'form': form})
+    return render(request, 'users/changeLights.html', {'form': form,
+                                                       'rooms': Room.objects.filter(owner=request.user),
+                                                       'lights': Light.objects.filter(owner=request.user)})

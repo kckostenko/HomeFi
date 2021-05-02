@@ -17,14 +17,40 @@
 			</table>
 		</p>
 	</header>
-
+	<p style="padding:5px"></p>
+	<table class="w3-table w3-table-all" style="width: 100%; margin:auto; padding:10px;">
+		<caption style="font-size:20px; vertical-align:top; caption-side:top; color:#000000;"> Current Alarm Information</caption>
+		<tr>
+			<th>Alarm Name</th>
+			<th> Alarm State </th>
+			<th> Code 1 </th>
+			<th> Code 2 </th>
+			<th> Code 3 </th>
+			<th> Code 4 </th>
+		</tr>
+		{% for alarm in alarms %}
+			<tr>
+				<td> {{ alarm.alarmName }} </td>
+				{% if alarm.state == True %}
+					<td> ARMED </td>
+				{% else %}
+					<td> DISARMED </td>
+				{% endif %}
+				<td> {{ alarm.code1 }}</td>
+				<td> {{ alarm.code2 }}</td>
+				<td> {{ alarm.code3 }}</td>
+				<td> {{ alarm.code4 }}</td>
+			</tr>
+		{% endfor %} <!-- end Alarms for loop -->
+	</table>
+	<hr style="  border-top: 8px solid #3399cc; border-radius: 5px; margin-top: 20px; margin-bottom: 20px;" />
     <form method="POST">
-      <div class="w3-display-container w3-container">
+      <div class="w3-display-container w3-container w3-light-grey">
 <!--        {% load static %} <img src="{% static 'images/home1.jpg' %}" alt="home" style="width:100%" />-->
 <!--          <div class="centered" style="background-color:darkslategrey;padding:24px;">-->
               {% csrf_token %}
-              <fieldset class="form-group" style="font-size:20px">
-                  <legend class="border-bottom mb-4" style="font-size:20px, p">Edit Alarm Information </legend>
+              <fieldset class="form-group" style="font-size:20px; border-style:solid; border-top-style: none;">
+                  <legend class="border-bottom mb-4" style="font-size:20px;">Edit Alarm Information </legend>
                   {{ form|crispy }}
               </fieldset>
 <!--            <label for="uname" style="font-size:30px;color:azure"><b>Username</b></label>-->

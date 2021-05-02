@@ -64,3 +64,4 @@ def smarthome(request):
 
 def forgotpswd(request):
     return render(request, "homepg/ForgotPswd.html")
+

@@ -24,6 +24,7 @@ class addLights(forms.Form):
         user = kwargs.pop('user')
         super(addLights, self).__init__(*args, **kwargs)
         self.fields['roomLoc'] = forms.ModelChoiceField(Models.Room.objects.filter(owner=user), label='Room Location')
+        self.order_fields(self.Meta.fields)
 
     #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.all(), label='Room Location')
     #order it by the user as well? like the id or whatever somehow?
@@ -61,6 +62,7 @@ class addLocks(forms.Form):
         user = kwargs.pop('user')
         super(addLocks, self).__init__(*args, **kwargs)
         self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
+        self.order_fields(self.Meta.fields)
 
     lockName = forms.CharField(min_length=2, max_length=20, label='Lock Name')
     #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
@@ -87,6 +89,40 @@ class removeLocks(forms.Form):
     class Meta:
         model = Models.Lock
 
+class changeLockForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(changeLockForm, self).__init__(*args, **kwargs)
+        self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
+        self.fields['lockName'] = forms.ModelChoiceField(queryset=Models.Lock.objects.filter(owner=None) | Models.Lock.objects.filter(owner=user), label="Current Lock Name")
+        self.order_fields(self.Meta.fields)
+
+    newNameBool = forms.BooleanField(required=False, label='Change Name? Y/N',)
+    newLockName = forms.CharField(required=False, min_length=2, max_length=20, label='New Lock Name', disabled=True)
+    #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
+    state = forms.BooleanField(required=False, label='LOCKED/UNLOCKED')
+    code1 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='First Code')
+    code2 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Second Code')
+    code3 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Third Code')
+    code4 = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Fourth Code')
+    class Meta:
+        model = Models.Lock
+        fields = ['lockName','newNameBool','newLockName','roomLoc', 'state', 'code1', 'code2', 'code3', 'code4']
+        #field_order = ['lockName', 'newNameBool', 'newLockName', 'roomLoc', 'state', 'code1', 'code2', 'code3', 'code4']
+
+
+class lockPin(forms.Form):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(lockPin, self).__init__(*args, **kwargs)
+        self.fields['lockName'] = forms.ModelChoiceField(queryset=Models.Lock.objects.filter(owner=None) | Models.Lock.objects.filter(owner=user), label="Lock Name")
+        self.order_fields(self.Meta.fields)
+
+    entryPin = forms.IntegerField(initial=1000, min_value=1000, max_value=9999, label='Enter PIN Code')
+
+    class Meta:
+        model = Models.Lock
+        fields = ['lockName', 'entryPin']
 
 class addAlarm(forms.Form):
     alarmName = forms.CharField(min_length=2, max_length=20, label='Alarm Name')
@@ -140,6 +176,7 @@ class changeLightForm(forms.Form):
         super(changeLightForm, self).__init__(*args, **kwargs)
         self.fields['roomLoc'] = forms.ModelChoiceField(queryset=Models.Room.objects.filter(owner=None) | Models.Room.objects.filter(owner=user), label='Room Location')
         self.fields['lightName'] = forms.ModelChoiceField(queryset=Models.Light.objects.filter(owner=None) | Models.Light.objects.filter(owner=user), label="Light Name")
+        self.order_fields(self.Meta.fields)
 
     #roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.get(owner=Models.Light.owner.id), label='Room Location')
     # roomLoc = forms.ModelChoiceField(queryset=Models.Room.objects.filter(user=request.user), label='Room Location')
@@ -153,3 +190,4 @@ class changeLightForm(forms.Form):
     color = forms.CharField(max_length=20, label='Color', required=False)
     class Meta:
         model = Models.Light
+        fields = ['lightName','roomLoc', 'lightType', 'state', 'dimness', 'color']

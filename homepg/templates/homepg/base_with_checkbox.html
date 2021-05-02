@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
@@ -78,6 +78,15 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 </script>
-
+<script>
+	$(document).ready(function(){
+		if ($("#div_id_newNameBool").is(':checked')){
+			$("#div_id_newLockName").prop("disabled", false);
+		}
+		else {
+			$("#div_id_newLockName").prop("disabled", true);
+		}
+	});
+</script>
 </body>
 </html>

@@ -101,8 +101,8 @@
 	<div id="Rooms" class="tabcontent" style="border:none">
 	  <h3>Add/Remove Room</h3>
 		<p> Select whether to add or remove a room. </p>
-	   <button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-rooms' %}">Add Room</a></button>
-		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'remove-rooms' %}">Remove Room</a></button>
+	   <button class="w3-btn w3-teal" style="width:32%; margin-top:10px;"><a href="{% url 'add-rooms' %}" style="color:white;">Add Room</a></button>
+		<button class="w3-btn w3-green" style="width:32%; margin-top:10px;"><a href="{% url 'remove-rooms' %}" style="color:white;">Remove Room</a></button>
 	</div>
 
 	<div id="Lights" class="tabcontent" style="border:none">
@@ -138,9 +138,9 @@
                     {% endfor %}	<!-- Lights for loop -->
 			{% endfor %}
 		</table>
-		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-lights' %}">Add Light</a></button>
-		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'remove-lights' %}">Remove Light</a></button>
-		<button class="w3-btn w3-light-green" style="width:32%"><a href="{% url 'change-lights' %}">Change Light Status</a></button>
+		<button class="w3-btn w3-teal" style="width:32%; margin-top:10px"><a href="{% url 'add-lights' %}" style="color:white;">Add Light</a></button>
+		<button class="w3-btn w3-green" style="width:32%; margin-top:10px"><a href="{% url 'remove-lights' %}" style="color:white;">Remove Light</a></button>
+		<button class="w3-btn w3-light-green" style="width:32%; margin-top:10px"><a href="{% url 'change-lights' %}" style="color:white;">Change Light Status</a></button>
 	</div>
 
 	<div id="Locks" class="tabcontent" style="border:none">
@@ -166,9 +166,9 @@
 				{% endfor %}	<!-- Locks for loop -->
             {% endfor %} 	<!-- Rooms for loop -->
 		</table>
-		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-locks' %}">Add Lock</a></button>
-		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'remove-locks' %}">Remove Lock</a></button>
-		<button class="w3-btn w3-light-green" style="width:32%">Change Lock Status</button>
+		<button class="w3-btn w3-teal" style="width:32%; margin-top:10px"><a href="{% url 'add-locks' %}" style="color:white;">Add Lock</a></button>
+		<button class="w3-btn w3-green" style="width:32%; margin-top:10px"><a href="{% url 'remove-locks' %}" style="color:white;">Remove Lock</a></button>
+		<button class="w3-btn w3-light-green" style="width:32%; margin-top:10px"><a href="{% url 'check-lock-pin' %}" style="color:white;">Change Lock Status</a></button>
 	</div>
 
 	<div id="Alarm" class="tabcontent" style="border:none">
@@ -190,8 +190,8 @@
 			</tr>
             {% endfor %} <!-- Alarms for loop -->
 		</table>
-		<button class="w3-btn w3-teal" style="width:32%"><a href="{% url 'add-alarm' %}">Add Alarm</a></button>
-		<button class="w3-btn w3-green" style="width:32%"><a href="{% url 'check-alarm-pin' %}">Change Alarm</a></button>
+		<button class="w3-btn w3-teal" style="width:32%; margin-top:10px"><a href="{% url 'add-alarm' %}" style="color:white;">Add Alarm</a></button>
+		<button class="w3-btn w3-green" style="width:32%; margin-top:10px"><a href="{% url 'check-alarm-pin' %}" style="color:white;">Change Alarm</a></button>
 	</div>
 
 	<!-- the JavaScript to get the tabs to work correctly -->

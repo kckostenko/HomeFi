@@ -1,9 +1,9 @@
-{% extends "homepg/base.html" %}
+{% extends "homepg/base_with_checkbox.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 	<!-- Top header -->
 	<header class="w3-container w3-xlarge">
-		<p class="w3-left">Change a Light</p>
+		<p class="w3-left">Change Lock</p>
 		<p class="w3-right">
 			<table>
 				<tr>
@@ -19,33 +19,35 @@
 	</header>
 	<p style="padding:5px"></p>
 	<table class="w3-table w3-table-all" style="width: 100%; margin:auto; padding:10px;">
-		<caption style="font-size:20px; vertical-align:top; caption-side:top; color:#000000;"> Current Light Information</caption>
-		<tr>
-			<th> Room</th>
-			<th>Light Name</th>
-			<th> Light Type </th>
-			<th> Status </th>
-			<th> Dim </th>
-			<th> Color </th>
-		</tr>
-		{% for room in rooms %}
-			{% for light in lights%}
-				{% if room.id == light.roomLoc.id %}
+		<caption style="font-size:22px; vertical-align:top; caption-side:top; color:#000000;"> Current Lock Information</caption>
+	<tr>
+		<th> Room Location</th>
+		<th>Lock Name</th>
+		<th> Lock State </th>
+		<th> Code 1 </th>
+		<th> Code 2 </th>
+		<th> Code 3 </th>
+		<th> Code 4 </th>
+	</tr>
+	{% for room in rooms %}
+		{% for lock in locks%}
 			<tr>
-					<td> {{ room.roomName }}</td>
-					<td> {{ light.lightName }} </td>
-					<td> {{ light.lightType}}</td>
-					{% if light.state == True %}
-						<td> ON </td>
-					{% else %}
-						<td> OFF </td>
-					{% endif %}
-					<td> {{ light.dimness}} </td>
-					<td> {{ light.color }}</td>
+			{% if room.id == lock.roomLoc.id %}
+				<td> {{ room.roomName }} </td>
+				<td> {{ lock.lockName }} </td>
+				{% if lock.state == True %}
+					<td> LOCKED </td>
+				{% else %}
+					<td> UNLOCKED </td>
+				{% endif %}
+				<td> {{ lock.code1 }}</td>
+				<td> {{ lock.code2 }}</td>
+				<td> {{ lock.code3 }}</td>
+				<td> {{ lock.code4 }}</td>
 			</tr>
-				{% endif %} 	<!-- roomname == light roomloc if statement -->
-			{% endfor %}	<!-- Lights for loop -->
-		{% endfor %}
+			{% endif %} 	<!-- roomname == lock roomloc if statement -->
+		{% endfor %}	<!-- Locks for loop -->
+	{% endfor %} 	<!-- Rooms for loop -->
 	</table>
 	<hr style="  border-top: 8px solid #3399cc; border-radius: 5px; margin-top: 20px; margin-bottom: 20px;" />
     <form method="POST">
@@ -54,16 +56,15 @@
 <!--          <div class="centered" style="background-color:darkslategrey;padding:24px;">-->
               {% csrf_token %}
               <fieldset class="form-group" style="font-size:20px">
-                  <legend class="border-bottom mb-4" style="font-size:20px">Edit Light Information </legend>
-                  <p style="font-weight: bold;"> Note: Cannot Edit Light Name</p>
+                  <legend class="border-bottom mb-4" style="font-size:20px,">Edit Lock Information </legend>
                   {{ form|crispy }}
               </fieldset>
 <!--            <label for="uname" style="font-size:30px;color:azure"><b>Username</b></label>-->
 <!--            <input type="text" placeholder="Enter Username" name="uname" required>-->
 <!--            <label for="psw" style="font-size:30px;color:azure"><b>Password</b></label>-->
 <!--            <input type="password" placeholder="Enter Password" name="psw" required>-->
-            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Change Light</button>
-            <!-- <label>
+            <button type="submit" style="width: 200px; padding: 10px; left: 50%; margin:10px;">Change Lock</button>
+		  	<!-- <label>
               <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
             -->
