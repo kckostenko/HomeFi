@@ -212,12 +212,13 @@ def changeLock(request):
             # form.cleaned_data is a DICTIONARY
             tempBool = form.cleaned_data['newNameBool']
             if tempBool:
-                locksObj.lockName = form.cleaned_data['newLockName']
+                locksObj.lockName = form.cleaned_data['newName']
             elif not tempBool:
                 locksObj.lockName = form.cleaned_data['lockName']
             else:
                 print("WHOOPSIE! clearly I coded something wrong wtf")
 
+            #locksObj.lockName = form.cleaned_data['lockName']
             locksObj.state = form.cleaned_data['state']
             locksObj.roomLoc = form.cleaned_data['roomLoc']
             locksObj.code1 = form.cleaned_data['code1']
@@ -229,6 +230,7 @@ def changeLock(request):
             allCodes = Model.Lock.objects.filter(owner_id=request.user)
             # old Alarm Name
             currentName = allCodes.values_list('lockName', flat=True)[0]
+            print(currentName, "cN")
             # if the old alarm name and new alarm name aren't equal...
             # delete the old alarm entry
             entry = Model.Lock.objects.get(lockName=str(currentName))
@@ -268,6 +270,7 @@ def alarmForm(request):
             return redirect("status-page")
         else:
             messages.info(request, "You already have one alarm for this home! \n You cannot have multiple!")
+            return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
         form = addAlarm()
@@ -313,24 +316,19 @@ def correctAlarmPin(request):
 
 def changeAlarm(request):
     if request.method == "POST":
-        # use user creation form that can be used in HTML (Django Provides It!)
-        # NOTE: must import UserCreationForm at top
-        # allAlarm = Model.Alarm.objects.get(owner_id=request.user.id)
-        # alarmName = allAlarm.values_list('alarmName', flat=True)[0]
-        # state1 = allAlarm.values_list('state', flat=True)[0]
-        # code1 = allAlarm.values_list('code1', flat=True)[0]
-        # code2 = allAlarm.values_list('code2', flat=True)[0]
-        # code3 = allAlarm.values_list('code3', flat=True)[0]
-        # code4 = allAlarm.values_list('code4', flat=True)[0]
-        # data = {'alarmName': str(alarmName), "state": str(state1), "code1": str(code1),
-        #         "code2": str(code2), "code3": str(code3), "code4": str(code4)}
-        # if get post request will create form that has request.POST data!
-        form = changeAlarmForm(request.POST)
+        form = changeAlarmForm(request.POST, user=request.user)
         if form.is_valid():
             alarmObj = Model.Alarm()
+            tempBool = form.cleaned_data['newNameBool']
+            if tempBool:
+                alarmObj.alarmName = form.cleaned_data['newName']
+            elif not tempBool:
+                alarmObj.alarmName = form.cleaned_data['alarmName']
+            else:
+                print("WHOOPSIE! clearly I coded something wrong wtf")
             # will tell us if form valid when submitted
             # form.cleaned_data is a DICTIONARY
-            alarmObj.alarmName = form.cleaned_data['alarmName']
+            #alarmObj.alarmName = form.cleaned_data['alarmName']
             alarmObj.state = form.cleaned_data['state']
             alarmObj.code1 = form.cleaned_data['code1']
             alarmObj.code2 = form.cleaned_data['code2']
@@ -351,7 +349,7 @@ def changeAlarm(request):
             return redirect("status-page")
     else:
         # if not POST request, will create a blank form!
-        form = changeAlarmForm()
+        form = changeAlarmForm(user=request.user)
     return render(request, 'users/changeAlarmForm.html',
                   {'form': form, 'rooms': Room.objects.filter(owner=request.user),
                    'alarms': Alarm.objects.filter(owner=request.user)})
@@ -404,10 +402,16 @@ def changeLights(request):
         if form.is_valid():
             # form.save()
             lightsObj = Model.Light()
-
+            tempBool = form.cleaned_data['newNameBool']
+            if tempBool:
+                lightsObj.lightName = form.cleaned_data['newName']
+            elif not tempBool:
+                lightsObj.lightName = form.cleaned_data['lightName']
+            else:
+                print("WHOOPSIE! clearly I coded something wrong wtf")
             # will tell us if form valid when submitted
             # form.cleaned_data is a DICTIONARY
-            lightsObj.lightName = form.cleaned_data['lightName']
+            #lightsObj.lightName = form.cleaned_data['lightName']
             lightsObj.roomLoc = form.cleaned_data['roomLoc']
             lightsObj.lightType = form.cleaned_data['lightType']
             lightsObj.color = form.cleaned_data['color']
@@ -420,7 +424,7 @@ def changeLights(request):
             # # old Alarm Name
             # currentName = allCodes.values_list('lightName', flat=True)[0]
             # delete the old alarm entry
-            entry = Model.Light.objects.get(lightName=str(lightsObj.lightName))
+            entry = Model.Light.objects.get(lightName=str(form.cleaned_data['lightName']))
             entry.delete()
             # replace it with the new data
             lightsObj.save()

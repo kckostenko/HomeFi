@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="536f5f8b-b5fd-4eb9-ab44-16dc334424bb" name="Default" comment="">
+    <list default="true" id="b2b40330-4a13-498a-9918-0e215540af6b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/homepg/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/homepg/templatetags/homepg_extras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_tutorial/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_tutorial/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_tutorial/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_tutorial/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homepg/templates/homepg/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/homepg/templates/homepg/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepg/templates/homepg/base_with_checkbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/homepg/templates/homepg/base_with_checkbox.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homepg/templates/homepg/smarthome.html" beforeDir="false" afterPath="$PROJECT_DIR$/homepg/templates/homepg/smarthome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homepg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/homepg/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/alarmPinCheck.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/alarmPinCheck.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/changeAlarmForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/changeAlarmForm.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/changeLights.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/changeLights.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
@@ -24,55 +22,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/users/views.py">
+      <file leaf-file-name="smarthome.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homepg/templates/homepg/smarthome.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3417">
+            <state relative-caret-position="289">
+              <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <element signature="n#style#0;n#h6#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#hr#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h6#0;n#table#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h6#0;n#table#2;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/users/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1821">
-              <caret line="190" column="15" lean-forward="true" selection-start-line="190" selection-start-column="15" selection-end-line="190" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/django_tutorial/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-255" />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base_with_checkbox.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/homepg/templates/homepg/base_with_checkbox.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1564">
-              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="changeLights.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/users/templates/users/changeLights.html">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="changeLockForm.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/users/templates/users/changeLockForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12">
-              <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+            <state relative-caret-position="-607" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="changeLights.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/users/templates/users/changeLights.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="57" selection-start-line="57" selection-end-line="57" />
             </state>
           </provider>
         </entry>
@@ -85,16 +61,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/django_tutorial/settings.py" />
-        <option value="$PROJECT_DIR$/users/forms.py" />
-        <option value="$PROJECT_DIR$/users/templates/users/changeLockForm.html" />
-        <option value="$PROJECT_DIR$/homepg/templates/homepg/base_with_checkbox.html" />
+        <option value="$PROJECT_DIR$/homepg/templates/homepg/smarthome.html" />
+        <option value="$PROJECT_DIR$/users/templates/users/changeLights.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1490" />
-    <option name="width" value="2365" />
+    <option name="x" value="1715" />
+    <option name="width" value="2135" />
     <option name="height" value="2075" />
   </component>
   <component name="ProjectView">
@@ -108,6 +82,30 @@
             <path>
               <item name="ProjectHomeFi2.0" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjectHomeFi2.0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectHomeFi2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectHomeFi2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="homepg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectHomeFi2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectHomeFi2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="homepg" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectHomeFi2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectHomeFi2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="homepg" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="homepg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectHomeFi2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectHomeFi2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="homepg" type="462c0819:PsiDirectoryNode" />
+              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ProjectHomeFi2.0" type="b2602c69:ProjectViewProjectNode" />
@@ -154,19 +152,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="536f5f8b-b5fd-4eb9-ab44-16dc334424bb" name="Default" comment="" />
-      <created>1619964879136</created>
+      <changelist id="b2b40330-4a13-498a-9918-0e215540af6b" name="Default" comment="" />
+      <created>1620149777543</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1619964879136</updated>
+      <updated>1620149777543</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="596" y="0" width="946" height="830" extended-state="0" />
+    <frame x="686" y="0" width="854" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24917673" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24908425" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -178,9 +176,9 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
@@ -189,68 +187,42 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/users/templates/users/lockPinCheck.html">
+    <entry file="file://$PROJECT_DIR$/homepg/templates/homepg/base_with_checkbox.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_tutorial/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
+        <state relative-caret-position="204">
+          <caret line="12" column="54" lean-forward="true" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/homepg/views.py">
+    <entry file="file://$PROJECT_DIR$/homepg/templatetags/homepg_extras.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-505">
+        <state relative-caret-position="119">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homepg/templates/homepg/smarthome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="n#style#0;n#h6#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#hr#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h6#0;n#table#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h6#0;n#table#2;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_tutorial/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1821">
-          <caret line="190" column="15" lean-forward="true" selection-start-line="190" selection-start-column="15" selection-end-line="190" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3417">
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/templates/users/changeLights.html">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/users/templates/users/changeLockForm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
-        </state>
+        <state relative-caret-position="-607" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/homepg/templates/homepg/base_with_checkbox.html">
+    <entry file="file://$PROJECT_DIR$/users/templates/users/changeLights.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1564">
-          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="408">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
         </state>
       </provider>
     </entry>
