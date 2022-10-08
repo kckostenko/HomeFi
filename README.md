@@ -10,4 +10,4 @@ How to test/use web application:
   * First go to the link: https://kostenko.dev/login/
   * Press the create new account button and follow the steps provided
   * Login and begin adding different home security devices and the rooms they are located in
-    * You must add a room before you can add any devices (except for an alarm)
+    * NOTE: You must add a room before you can add any devices (except for an alarm)
