@@ -88,6 +88,8 @@
 				{% if forloop.last and flag %}
 					<h6 style="color:red; font-weight:bold;">There are no lights</h6>
 				{% endif %}
+			{% empty %}
+				<h6 style="color:red; font-weight:bold;">There are no lights</h6>
 			{% endfor %}	<!-- Lights for loop -->
 				</table>
 			{% endwith %}
@@ -95,32 +97,37 @@
 				<p style="font-size:16px; font-weight:bold"> Locks: </p>
 					<table class="w3-table w3-table-all">
 
-				{% with True as flag %}
- 				{% for lock in locks%}
-					{% if room.id == lock.roomLoc.id %}
-						{% if flag %}
-					<tr>
-						<th>Lock Name</th>
-						<th> Lock State </th>
-					</tr>
-						<tr>
-							{% update_variable False as flag %}
-                       {% endif %}
 
-                            <td> {{ lock.lockName }} </td>
-							{% if lock.state == True %}
-								<td> LOCKED </td>
-							{% else %}
-								<td> UNLOCKED </td>
-							{% endif %}
-                    	{% endif %} 	<!-- roomname == lock roomloc if statement -->
-						</tr>
-					{% if forloop.last and flag %}
-						<h6 style="color:red; font-weight:bold;">There are no locks</h6>
-					{% endif %}
-                {% endfor %}	<!-- Locks for loop -->
-					</table>
-				{% endwith %}
+			{% with True as flag %}
+			{% for lock in locks%}
+				{% if room.id == lock.roomLoc.id %}
+					{% if flag %}
+				<tr>
+					<th>Lock Name</th>
+					<th> Lock State </th>
+				</tr>
+					<tr>
+						{% update_variable False as flag %}
+				   {% endif %}
+
+						<td> {{ lock.lockName }} </td>
+						{% if lock.state == True %}
+							<td> LOCKED </td>
+						{% else %}
+							<td> UNLOCKED </td>
+						{% endif %}
+					{% endif %} 	<!-- roomname == lock roomloc if statement -->
+					</tr>
+				{% if forloop.last and flag %}
+					<h6 style="color:red; font-weight:bold;">There are no locks</h6>
+				{% endif %}
+
+			{% empty %}
+				<h6 style="color:red; font-weight:bold;">There are no locks</h6>
+
+			{% endfor %}	<!-- Locks for loop -->
+				</table>
+			{% endwith %}
 
 
 		<hr style="  border-top: 8px solid #3399cc; border-radius: 5px;" />
